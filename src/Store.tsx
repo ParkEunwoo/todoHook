@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer} from 'react';
+import React, {useReducer} from 'react';
 import useLoad from './util/useLoad';
 import reducer from './reducer';
 import useSave from './util/useSave';

@@ -4,7 +4,7 @@ import { TodoContext } from './../../Store';
 
 const Header: React.FC = () => {
     const {todos} = useContext(TodoContext);
-    console.log(todos);
+    
     return (
         <header>
           <h1>ToDoList</h1>

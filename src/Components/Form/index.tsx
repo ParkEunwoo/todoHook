@@ -3,7 +3,7 @@ import './Form.css';
 import { TodoContext } from './../../Store';
 
 const Form: React.FC = () => {
-    const {dispatch, todos} = useContext(TodoContext);
+    const {dispatch} = useContext(TodoContext);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const addTodoData = (e:React.MouseEvent<HTMLInputElement>) => {

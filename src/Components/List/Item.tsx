@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './Item.css';
+import { TodoContext } from './../../Store';
 
 interface Props {
     title: string;
