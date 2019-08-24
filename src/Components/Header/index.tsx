@@ -1,17 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './Header.css';
+import { TodoContext } from './../../Store';
 
-interface Todo {
-  id: number;
-  title: string;
-  state: string;
-}
-
-interface Props {
-  todos: Array<Todo>;
-}
-
-const Header: React.SFC<Props> = ({todos}) => {
+const Header: React.FC = () => {
+    const {todos} = useContext(TodoContext);
+    console.log(todos);
     return (
         <header>
           <h1>ToDoList</h1>

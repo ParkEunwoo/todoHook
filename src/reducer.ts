@@ -16,7 +16,7 @@ const reducer = (todos:Array<Todo>, {type, payload}:ActionType) => {
         case 'ADD_TODO':
             return [...todos, {title: payload, id : todos.length, state : 'todo'}];
         case 'SET_INIT_DATA':
-            return payload;
+            return payload?payload:[];
         case 'CHANGE_TODO_STATE':
             return todos.map(todo => {
                 if(todo.id === +payload) {

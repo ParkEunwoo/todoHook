@@ -15,10 +15,14 @@ type ActionType = {
 interface TodoInterface {
     todos: Array<Todo>;
     loading: boolean;
-    dispatch: React.Dispatch<ActionType>;
+    dispatch?: React.Dispatch<ActionType>;
+}
+const defaultContext:TodoInterface = {
+    todos: [],
+    loading: false
 }
 
-export const TodoContext = React.createContext<TodoInterface | null>(null);
+export const TodoContext = React.createContext<TodoInterface>(defaultContext);
 
 interface Props {
 
@@ -30,7 +34,7 @@ const Store:React.SFC<Props & {Todos?: Array<Todo>}> = (props, {Todos = []}) => 
 
     const setInitData = (initData: any) => {
         dispatch({type:'SET_INIT_DATA', payload:initData})
-      }
+    }
     
     const loading = useLoad(setInitData, 'todos');
   
