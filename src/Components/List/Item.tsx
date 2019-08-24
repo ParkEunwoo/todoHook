@@ -1,9 +1,13 @@
 import React from 'react';
 import './Item.css';
 
-const Item: React.FC = () => {
+interface Props {
+    title: string;
+}
+
+const Item: React.SFC<Props> = ({title}) => {
     return (
-        <li>오늘 할일ㅇㅇㅇ</li>
+        <li>{title}</li>
     )
 }
 
