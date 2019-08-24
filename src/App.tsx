@@ -1,15 +1,15 @@
 import React from 'react';
-import Header from './Header';
-import Form from './Form';
-import List from './List';
+import Header from './Components/Header';
+import Form from './Components/Form';
+import List from './Components/List';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <>
       <Header />
       <Form />
       <List />
-    </div>
+    </>
   );
 }
 
