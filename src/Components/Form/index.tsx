@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import './Form.css';
 
 interface Props {
-    addTodo:(e:React.MouseEvent<HTMLInputElement>) => void;
-    changeInput:(e:React.ChangeEvent<HTMLInputElement>) => void;
+    addTodo:(title:string) => void;
 }
-const Form: React.SFC<Props> = ({addTodo, changeInput}) => {
+
+const Form: React.SFC<Props> = ({addTodo}) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const addTodoData = (e:React.MouseEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      if(inputRef && inputRef.current){
+        addTodo(inputRef.current.value);
+        inputRef.current.value = '';
+      }
+    }
+
     return (
         <form>
-            <input type="text" onChange={changeInput} />
-            <input type="submit" value="확인" onClick={addTodo} />
+            <input type="text" ref={inputRef} />
+            <input type="submit" value="확인" onClick={addTodoData} />
         </form>
     );
 }

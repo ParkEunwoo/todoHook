@@ -11,15 +11,10 @@ interface Todo {
 
 const App: React.FC<{Todos?: Array<Todo>}> = ({Todos = []}) => {
   const [todos, setTodos] = useState(Todos);
-  const [newTodo, setNewTodo] = useState();
 
-  const addTodo = (e:React.MouseEvent<HTMLInputElement>) => {
-    e.preventDefault();
+  const addTodo = (title:string) => {
+    const newTodo = {id: todos.length, title, state:'todo'}
     setTodos([...todos, newTodo]);
-  }
-
-  const changeInput = (e:React.ChangeEvent<HTMLInputElement>) => {
-    setNewTodo({id: todos.length, title: e.target.value, state:'todo'});
   }
 
   useEffect(() => {
@@ -29,7 +24,7 @@ const App: React.FC<{Todos?: Array<Todo>}> = ({Todos = []}) => {
   return (
     <>
       <Header />
-      <Form addTodo={addTodo} changeInput={changeInput}/>
+      <Form addTodo={addTodo}/>
       <List todos={todos}/>
     </>
   );
