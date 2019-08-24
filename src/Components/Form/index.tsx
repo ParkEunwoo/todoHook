@@ -1,17 +1,15 @@
-import React, {useRef} from 'react';
+import React, {useContext, useRef} from 'react';
 import './Form.css';
+import { TodoContext } from './../../Store';
 
-interface Props {
-    addTodo:(title:string) => void;
-}
-
-const Form: React.SFC<Props> = ({addTodo}) => {
+const Form: React.FC = () => {
+    const {dispatch, todos} = useContext(TodoContext);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const addTodoData = (e:React.MouseEvent<HTMLInputElement>) => {
       e.preventDefault();
       if(inputRef && inputRef.current){
-        addTodo(inputRef.current.value);
+        dispatch && dispatch({type:'ADD_TODO', payload:inputRef.current.value});
         inputRef.current.value = '';
       }
     }

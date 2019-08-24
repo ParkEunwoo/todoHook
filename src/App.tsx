@@ -8,8 +8,8 @@ const App: React.FC = () => {
   return (
     <Store>
       <Header />
-      {/* {<Form />
-      <List />} */}
+      <Form />
+      {/*<List />} */}
     </Store>
   );
 }

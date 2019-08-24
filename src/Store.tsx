@@ -1,6 +1,7 @@
 import React, {useEffect, useReducer} from 'react';
 import useLoad from './util/useLoad';
 import reducer from './reducer';
+import useSave from './util/useSave';
 
 interface Todo {
     id: number;
@@ -8,7 +9,7 @@ interface Todo {
     state: string;
 }
 type ActionType = {
-    type: 'ADD_TODO'|'SET_INIT_DATA'|'CHANGE_TODO_STATE';
+    type: 'ADD_TODO'|'SET_INIT_DATA'|'CHANGE_TODO_STATE'|'SAVE_DATA';
     payload: any;
 }
 
@@ -33,10 +34,11 @@ const Store:React.SFC<Props & {Todos?: Array<Todo>}> = (props, {Todos = []}) => 
 
 
     const setInitData = (initData: any) => {
-        dispatch({type:'SET_INIT_DATA', payload:initData})
+        dispatch({type:'SET_INIT_DATA', payload:initData});
     }
     
     const loading = useLoad(setInitData, 'todos');
+    useSave(todos, 'todos');
   
     return (
         <TodoContext.Provider value={{todos, loading, dispatch}}>

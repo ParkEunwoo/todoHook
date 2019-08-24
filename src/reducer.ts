@@ -1,7 +1,7 @@
 
 
 type ActionType = {
-    type: 'ADD_TODO'|'SET_INIT_DATA'|'CHANGE_TODO_STATE';
+    type: 'ADD_TODO'|'SET_INIT_DATA'|'CHANGE_TODO_STATE'|'SAVE_DATA';
     payload: any;
 }
 
@@ -24,6 +24,8 @@ const reducer = (todos:Array<Todo>, {type, payload}:ActionType) => {
                 }
                 return todo;
             });
+        case 'SAVE_DATA':
+            return;
         default:
             return;
     }

@@ -3,11 +3,14 @@ import {useState, useEffect} from 'react';
 const useLoad = (callback:Function, key:string) => {
     const [loading, setLoading] = useState(false);
 
-    const loadInitData = () => {
+    const loadInitData = async () => {
         setLoading(true);
-        const initData = localStorage.getItem(key);
-        callback(initData);
-        setLoading(false);
+        const data = await localStorage.getItem(key);
+        if(data){
+            const initData = await JSON.parse(data);
+            callback(initData);
+            setLoading(false);
+        }
     }
 
     useEffect(() => {
