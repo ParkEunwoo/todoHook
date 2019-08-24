@@ -6,7 +6,7 @@ const useSave = (data:any, key:string) => {
         setSaving(true);
         localStorage.setItem(key, JSON.stringify(data));
         setSaving(false);
-    }, [data])
+    }, [data, key])
     return saving;
 }
 
