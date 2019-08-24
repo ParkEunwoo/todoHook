@@ -1,0 +1,30 @@
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form>input {
+    outline: none;
+    font-size: 1em;
+}
+
+form>input[type=text] {
+    border-radius: 1em;
+    border-color: #2c3e50;
+    border-width: 1px;
+    padding: .6em 1.2em;
+}
+
+form>input[type=submit] {
+    padding: .6em 1.2em;
+    border-radius: 1em;
+    background: #3498db;
+    color: white;
+    border: none;
+    margin: 0 1em;
+}
+
+form>input[type=submit]:hover {
+    background: #2980b9;
+}

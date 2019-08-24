@@ -1,0 +1,20 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.4em;
+}
+
+header>h1 {
+    margin: auto;
+}
+
+header>.notification {
+    background: #2980b9;
+    color: white;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    border-radius: 50%;
+}
