@@ -6,10 +6,10 @@ import useSave from './util/useSave';
 interface Todo {
     id: number;
     title: string;
-    state: string;
+    status: string;
 }
 type ActionType = {
-    type: 'ADD_TODO'|'SET_INIT_DATA'|'CHANGE_TODO_STATE'|'SAVE_DATA';
+    type: 'ADD_TODO'|'SET_INIT_DATA'|'CHANGE_TODO_STATUS';
     payload: any;
 }
 

@@ -1,15 +1,25 @@
-import React, {useContext} from 'react';
+import React, {useContext, useRef} from 'react';
 import './Item.css';
 import { TodoContext } from './../../Store';
 
 interface Props {
+    id: number;
     title: string;
-    state: string;
+    status: string;
 }
 
-const Item: React.SFC<Props> = ({title, state}) => {
+const Item: React.SFC<Props> = ({id, title, status}) => {
+    const {dispatch} = useContext(TodoContext);
+    const itemRef = useRef<HTMLLIElement>(null);
+
+    const toggleItem = () => {
+        if(itemRef && itemRef.current){
+            const {id} = itemRef.current.dataset;
+            dispatch && dispatch({type:'CHANGE_TODO_STATUS', payload:id});
+        }
+    }
     return (
-        <li className={state}>{title}</li>
+        <li data-id={id} className={status} ref={itemRef} onClick={toggleItem}>{title}</li>
     )
 }
 

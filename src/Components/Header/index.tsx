@@ -8,7 +8,7 @@ const Header: React.FC = () => {
     return (
         <header>
           <h1>ToDoList</h1>
-          <div className="notification">{todos.filter(todo => todo.state='todo').length}</div>
+          <div className="notification">{todos.filter(todo => todo.status==='todo').length}</div>
         </header>
     );
 }

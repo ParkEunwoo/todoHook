@@ -1,31 +1,30 @@
 
 
 type ActionType = {
-    type: 'ADD_TODO'|'SET_INIT_DATA'|'CHANGE_TODO_STATE'|'SAVE_DATA';
+    type: 'ADD_TODO'|'SET_INIT_DATA'|'CHANGE_TODO_STATUS';
     payload: any;
 }
 
 interface Todo {
     id: number;
     title: string;
-    state: string;
+    status: string;
 }
   
 const reducer = (todos:Array<Todo>, {type, payload}:ActionType) => {
     switch(type){
         case 'ADD_TODO':
-            return [...todos, {title: payload, id : todos.length, state : 'todo'}];
+            return [...todos, {title: payload, id : todos.length, status : 'todo'}];
         case 'SET_INIT_DATA':
-            return payload?payload:[];
-        case 'CHANGE_TODO_STATE':
+            return payload ? payload : [];
+        case 'CHANGE_TODO_STATUS':
             return todos.map(todo => {
+                let status = todo.status;
                 if(todo.id === +payload) {
-                    todo.state === "done" ? todo.state = "todo" : todo.state = "done";
+                    status = todo.status === 'done' ? 'todo' : 'done';
                 }
-                return todo;
+                return {...todo, status};
             });
-        case 'SAVE_DATA':
-            return;
         default:
             return;
     }

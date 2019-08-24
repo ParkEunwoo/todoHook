@@ -5,7 +5,8 @@ import { TodoContext } from './../../Store';
 
 const List: React.FC = () => {
     const {todos, loading} = useContext(TodoContext);
-    let todoList = loading ? <div>loading...</div> : todos.map(todo => <Item key={todo.id} title={todo.title} state={todo.state}/>);
+    
+    let todoList = loading || todos.length===0 ? <div>Please add todo</div> : todos.map(todo => <Item key={todo.id} {...todo}/>);
 
     return (
         <ul>
