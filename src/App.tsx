@@ -23,7 +23,7 @@ const App: React.FC<{Todos?: Array<Todo>}> = ({Todos = []}) => {
 
   return (
     <>
-      <Header />
+      <Header todos={todos}/>
       <Form addTodo={addTodo}/>
       <List todos={todos}/>
     </>

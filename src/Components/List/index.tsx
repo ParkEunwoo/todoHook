@@ -13,7 +13,7 @@ interface Props {
 }
 
 const List: React.SFC<Props> = ({todos}) => {
-    const todoList = todos.map(todo => <Item key={todo.id} title={todo.title} />)
+    const todoList = todos.map(todo => <Item key={todo.id} title={todo.title} state={todo.state}/>)
     return (
         <ul>
             {todoList}

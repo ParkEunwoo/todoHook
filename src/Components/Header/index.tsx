@@ -1,11 +1,21 @@
 import React from 'react';
 import './Header.css';
 
-const Header: React.FC = () => {
+interface Todo {
+  id: number;
+  title: string;
+  state: string;
+}
+
+interface Props {
+  todos: Array<Todo>;
+}
+
+const Header: React.SFC<Props> = ({todos}) => {
     return (
         <header>
           <h1>ToDoList</h1>
-          <div className="notification">1</div>
+          <div className="notification">{todos.filter(todo => todo.state='todo').length}</div>
         </header>
     );
 }

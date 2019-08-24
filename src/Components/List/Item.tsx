@@ -3,11 +3,12 @@ import './Item.css';
 
 interface Props {
     title: string;
+    state: string;
 }
 
-const Item: React.SFC<Props> = ({title}) => {
+const Item: React.SFC<Props> = ({title, state}) => {
     return (
-        <li>{title}</li>
+        <li className={state}>{title}</li>
     )
 }
 
