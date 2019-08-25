@@ -135,6 +135,31 @@ const Container: React.FC = () => {
 
 useRef
 ---
+기존 스크립트로 html의 dom객체를 불러오기 위해서 `document.getElementById`와 같은 함수를 이용했었다. react로는 dom을 직접 조작하는 것보다 react가 관리하도록 ref를 사용하는 것이 좋다.
+```tsx
+import React, {useState, useRef} from 'react';
+
+const Form: React.FC = () => {
+    const [inputData, setInputData] = useState('');
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const addInputData = (e:React.MouseEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      if(inputRef && inputRef.current){
+        setInputData(inputRef.current.value);
+        inputRef.current.value = '';
+      }
+    }
+
+    return (
+        <form>
+            <input type="text" ref={inputRef} />
+            <input type="submit" value="확인" onClick={addInputData} />
+        </form>
+    );
+}
+```
+원하는 dom에게 ref를 설정해서 해당 dom의 내용을 쉽게 가져올 수 있다.
 
 useReducer
 ---
