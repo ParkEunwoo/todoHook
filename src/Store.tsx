@@ -29,7 +29,7 @@ interface Props {
 
 }
 
-const Store:React.SFC<Props & {Todos?: Array<Todo>}> = (props, {Todos = []}) => {
+const Store:React.FC<Props & {Todos?: Array<Todo>}> = (props, {Todos = []}) => {
     const [todos, dispatch] = useReducer(reducer, Todos);
 
 

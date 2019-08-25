@@ -8,7 +8,7 @@ interface Props {
     status: string;
 }
 
-const Item: React.SFC<Props> = ({id, title, status}) => {
+const Item: React.FC<Props> = ({id, title, status}) => {
     const {dispatch} = useContext(TodoContext);
     const itemRef = useRef<HTMLLIElement>(null);
 
