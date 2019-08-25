@@ -163,3 +163,78 @@ const Form: React.FC = () => {
 
 useReducer
 ---
+contextApi를 이용해서 state들을 관리했었는데 보다 더 복잡한 처리를 해주어야 할 경우 결국 redux와 같은 상태관리 도구를 이용해야한다. 하지만 hook을 이용해 좀 더 간편하게 사용할 수 있다. [redux에 대한 간략한 설명](#redux에-대한-간략한-설명)  
+
+contextApi를 이용해 store를 만들었던 곳에서 reducer를 적용해준다. 그러기 위해서 action을 분기해서 실행할 수 있는 reducer를 만들어야한다.
+```ts
+type ActionType = {
+    type: 'SET_INIT_DATA'|'ADD_DATA'|'UPDATE_DATA'|'DELETE_DATA';
+    payload: any;
+}
+
+interface Data {
+    
+}
+  
+const reducer = (data:Array<Data>, {type, payload}:ActionType) => {
+    switch(type){
+        case 'SET_INIT_DATA':
+            return ;
+        case 'ADD_DATA':
+            return ;
+        case 'UPDATE_DATA':
+            return ;
+        case 'DELETE_DATA':
+            return ;
+        default:
+            return;
+    }
+}
+
+export default reducer;
+```
+store를 직접 변경하는 reducer를 만들고 store에서 불러와서 사용한다.
+```tsx
+import React, {useReducer} from 'react';
+import reducer from './reducer';
+
+interface Data {
+}
+
+type ActionType = {
+    type: 'SET_INIT_DATA'|'ADD_DATA'|'UPDATE_DATA'|'DELETE_DATA';
+    payload: any;
+}
+
+interface ContextInterface {
+    state: Data;
+    dispatch?: React.Dispatch<ActionType>;
+}
+
+const defaultContext: ContextInterface = {
+    state: null,
+}
+
+export const TodoContext = React.createContext<TodoInterface>(defaultContext);
+
+interface Props {
+
+}
+
+const Store:React.FC<Props & {defaultData?: Data}> = (props, {defaultData = null}) => {
+    const [data, dispatch] = useReducer(reducer, defaultData);
+
+    return (
+        <TodoContext.Provider value={{data, dispatch}}>
+            {props.children}
+        </TodoContext.Provider>
+    )
+}
+
+export default Store;
+```
+위와같이 `useReducer`를 이용해 dispatch를 만들고 contextApi에 전송시킬 수 있다. 전송받은 dispatch는 `dispatch({type:'ADD_DATA', payload: data});`와 같이 사용할 수 있다.
+
+redux에 대한 간략한 설명
+---
+redux는 여러 컴포넌트들에서 사용될 데이터들을 store에 저장해두고 store에 있는 데이터들은 반드시 reducer만이 조작할 수 있게 한다. 각 컴포넌트에서 데이터를 조작할 경우 어떤 일을 할지에 대해 action이라는 것을 dispatch에게 보내면 dispatch는 reducer에게 action을 전달하고 해당 작업이 끝나면 등록된 컴포넌트들에게 데이터가 변경됨을 알린다.
