@@ -238,3 +238,4 @@ export default Store;
 redux에 대한 간략한 설명
 ---
 redux는 여러 컴포넌트들에서 사용될 데이터들을 store에 저장해두고 store에 있는 데이터들은 반드시 reducer만이 조작할 수 있게 한다. 각 컴포넌트에서 데이터를 조작할 경우 어떤 일을 할지에 대해 action이라는 것을 dispatch에게 보내면 dispatch는 reducer에게 action을 전달하고 해당 작업이 끝나면 등록된 컴포넌트들에게 데이터가 변경됨을 알린다.
+>[Redux로의 카툰 안내서](http://bestalign.github.io/2015/10/26/cartoon-intro-to-redux/)
