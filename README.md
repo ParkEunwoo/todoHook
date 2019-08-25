@@ -14,7 +14,7 @@ Hook
 useState
 ---
 기존 class component에서만 관리할 수 있던 state를 function component 에서도 관리할 수 있도록 만들어졌다.
-```jsx
+```tsx
 import React, {useState} from 'react';
 
 const App: React.FC = () => {
@@ -54,6 +54,26 @@ const App: React.FC<Props> = (props) => {
 
 useEffect
 ---
+state와 마찬가지로 class component에서만 관리할 수 있던 react의 라이프사이클을 관리할 수 있다. `useEffect`가 접근할 수 있는 라이프 사이클은 `componentDidMount`, `componentWillUnmount`, `componentDidUpdate`, `shouldComponentUpdate`이다.
+
+```tsx
+import React, {useEffect} from 'react';
+
+const App: React.FC = () => {
+    useEffect(() => {
+        // 최초 componentDidMount 이후 componentDidUpdate
+        console.log('did');
+        return () => {
+            // 반환 함수 componentWillUnmount
+            console.log('unmount');
+        }
+    }, []); // 두번째 인자로 들어간 배열로 어떤 값이 변경되었을 때 update할지 정할 수 있다. 빈 배열일 경우 update하지 않음
+
+    return (
+        console.log('render');
+    )
+}
+```
 
 useContext
 ---
