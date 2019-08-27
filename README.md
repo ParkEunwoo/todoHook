@@ -3,7 +3,86 @@ Todo Hook
 
 ## Todo List with React Hook & TypeScript
 
-Hook
+Functional Programming
+---
+함수형 프로그래밍이란 기존 어떤 알고리즘(**How**)으로 동작하라고 명시하는 식의 프로그래밍에서 벗어나 무엇(**What**)을 해야하는 지 명시하는 방식의 프로그래밍이다. 함수가 특정 동작을 수행하는 
+역할을 담당하는 것과 반대로 함수가 다른 값을 변경시키거나 할 수 없다.  
+
+필요한 개념
+---
+- [1급 객체 (First Object)](#1급-객체-(First-Object))
+- [고차 함수 (High-Order Function)](#고차-함수-(High-Order-Function))
+- [불변성 (Immutablility)](#불변성-(Immutablility))
+- [순수 함수 (Pure Function)](#순수-함수-(Pure-Function))
+- [합성 함수 (Function Composition)](#합성-함수-(Function-Composition))
+
+1급 객체 (First Object)
+---
+함수를 변수처럼 사용할 수 있어야한다. 파라미터로 전달하거나 함수의 반환값으로 사용할 수 있어야한다. 변수 명이 아닌 고유 식별자가 존재해야한다.
+
+고차 함수 (High-Order Function)
+---
+- 함수에 함수를 파라미터로 전달할 수 있다.
+- 함수의 반환값으로 함수를 사용할 수 있다.
+
+```javascript
+const foo = function() {
+    const closure = 10;
+    return function() {
+        console.log('foo' + closure);
+    }
+}
+
+const bar = function(fc) {
+    fc();
+}
+
+bar(foo);
+
+// 실행값
+// foo10
+```
+
+불변성 (Immutablility)
+---
+데이터가 변경되어서는 안된다. 만약 변경이 필요할 경우 직접 원본 데이터를 변경하지 않고, 복사본을 만들고 변경한 복사본을 이용해 작업을 진행한다. 자바스크립트는 이를 위해 `map`과 `reduce`와 같은 함수를 제공한다.
+```javascript
+const A = [10,20,30];
+const B = A;
+B.push(40);
+```
+> 위와 같이 한다면 A = B = [10, 20, 30, 40] 이므로 불변성에 위배된다.
+```javascript
+const A = [10,20,30];
+const B = [].concat(A);
+B.push(40);
+```
+> concat함수를 이용해 A의 복사본을 만들어서 변경해야한다.
+
+순수 함수 (Pure Function)
+---
+- 동일한 입력값에 항상 같은 값을 반환하는 함수 (random이나 date같은 함수가 내부에서 사용되면 안된다.)
+- 함수 외부의 상태값을 변경하거나 인자로 받은 값을 변경하지 않는 함수 (side effect 가 존재하면 안된다.)
+
+합성 함수 (Function Composition)
+---
+함수형 프로그램은 여러 작은 순수함수들로 이루어져 있기 때문에 이 함수들을 연쇄적으로 병렬적으로 호출해서 사용할 수 있어야한다.  
+`(x + y)^2 + 10` 을 수행 할 떄
+```javascript
+const sum = (x, y) => x + y;
+const square = x => x * x;
+const addTen = x => x + 10;
+
+const answer = addTen(square(sum(1, 2))); // 이렇게 하지 않고
+
+//compose를 활용해 연쇄적으로 호출을 처리하도록 한다.
+const compose = (...fns) => fns.reduce((prevFn, nextFn) => (...args) => nextFn(prevFn(...args)), value => value);
+
+const composeAnswer = compose(addTen, square, sum);
+```
+
+
+React Hook
 ---
 - [useState](#usestate)
 - [useEffect](#useeffect)
